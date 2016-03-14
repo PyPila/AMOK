@@ -1,0 +1,28 @@
+version: '2'
+services:
+  nginx:
+    image: nginx
+    volumes:
+      - "./nginx/conf.d:/etc/nginx/conf.d"
+    ports:
+      - "80:80"
+    links:
+      - "auth"
+      - "yell"
+
+  auth:
+    build:
+      context: ./auth
+      dockerfile: devel.Dockerfile
+    volumes:
+      - "./auth/src:/run/service"
+      - "./auth/auth-client:/run/auth-client"
+
+  yell:
+    build:
+      context: ./yell
+      dockerfile: devel.Dockerfile
+    volumes:
+      - "./yell/src:/run/service"
+    links:
+      - "auth"
