@@ -10,3 +10,6 @@
 [submodule "restservice"]
 	path = restservice
 	url = git@github.com:PyPila/restservice.git
+[submodule "affront"]
+	path = affront
+	url = git@github.com:PyPila/affront.git

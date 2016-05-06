@@ -1,28 +1,12 @@
 version: '2'
 services:
-  nginx:
-    image: nginx
+
+  apof:
+    build:
+      context: ./apof
+      dockerfile: devel.Dockerfile
     volumes:
-      - "./nginx/conf.d:/etc/nginx/conf.d"
+      - "./apof/src:/run/service"
     ports:
-      - "80:80"
-    links:
-      - "auth"
-      - "yell"
+      - "8000:8000"
 
-  auth:
-    build:
-      context: ./auth
-      dockerfile: devel.Dockerfile
-    volumes:
-      - "./auth/src:/run/service"
-      - "./auth/auth-client:/run/auth-client"
-
-  yell:
-    build:
-      context: ./yell
-      dockerfile: devel.Dockerfile
-    volumes:
-      - "./yell/src:/run/service"
-    links:
-      - "auth"
